@@ -6,11 +6,12 @@
 // multi-team module would add a `teamId` column and filter by it here.
 import { and, asc, desc, eq, like, lte, or } from "drizzle-orm";
 import { getDb } from "@/lib/db";
-import { clients } from "@/lib/db/schema";
+import { clientFiles, clients } from "@/lib/db/schema";
 import { todayInTashkent } from "@/lib/dates";
 import { ACTIVE_STAGES, CLIENT_STAGES, type ClientStage } from "@/features/clients/constants";
 
 export type Client = typeof clients.$inferSelect;
+export type ClientFile = typeof clientFiles.$inferSelect;
 
 const STAGE_VALUES = CLIENT_STAGES.map((stage) => stage.value);
 
@@ -66,6 +67,28 @@ export async function getClient(id: string): Promise<Client | undefined> {
     .where(eq(clients.id, id))
     .limit(1);
   return client;
+}
+
+/**
+ * Lists a client's uploaded files, newest first.
+ */
+export async function listClientFiles(clientId: string): Promise<ClientFile[]> {
+  const db = getDb();
+  return db
+    .select()
+    .from(clientFiles)
+    .where(eq(clientFiles.clientId, clientId))
+    .orderBy(desc(clientFiles.createdAt));
+}
+
+export async function getClientFile(id: string): Promise<ClientFile | undefined> {
+  const db = getDb();
+  const [file] = await db
+    .select()
+    .from(clientFiles)
+    .where(eq(clientFiles.id, id))
+    .limit(1);
+  return file;
 }
 
 export type DashboardData = {

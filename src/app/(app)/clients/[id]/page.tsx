@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatUzDate, todayInTashkent } from "@/lib/dates";
 import { requireUser } from "@/lib/session";
-import { getClient } from "@/features/clients/queries";
+import { getClient, listClientFiles } from "@/features/clients/queries";
 import type { ClientStage } from "@/features/clients/constants";
 import { StageBadge } from "@/features/clients/components/stage-badge";
 import { DeleteClientButton } from "@/features/clients/components/delete-client-button";
 import { SavedToast } from "@/features/clients/components/saved-toast";
+import { ClientFiles } from "@/features/clients/components/client-files";
+import { AiDraft } from "@/features/clients/components/ai-draft";
 
 function Field({ label, value }: { label: string; value: React.ReactNode }) {
   return (
@@ -31,6 +33,8 @@ export default async function ClientDetailPage({
   if (!client) {
     notFound();
   }
+
+  const files = await listClientFiles(id);
 
   return (
     <div className="flex flex-col gap-4">
@@ -71,6 +75,9 @@ export default async function ClientDetailPage({
           </div>
         </CardContent>
       </Card>
+
+      <ClientFiles clientId={client.id} files={files} />
+      <AiDraft clientId={client.id} />
     </div>
   );
 }

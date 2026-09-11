@@ -9,7 +9,9 @@ import { redirect } from "next/navigation";
 import { getDb } from "@/lib/db";
 import { clients } from "@/lib/db/schema";
 import { requireUser } from "@/lib/session";
+import { deleteObject } from "@/lib/files";
 import { clientFormSchema } from "@/features/clients/schema";
+import { listClientFiles } from "@/features/clients/queries";
 
 export type ClientFormValues = {
   name: string;
@@ -152,6 +154,21 @@ export async function updateClient(
 
 export async function deleteClient(id: string): Promise<void> {
   await requireUser();
+
+  // Delete the client's R2 objects before the row itself: the DB's
+  // cascading delete removes the `client_files` rows for free, but nothing
+  // deletes the R2 objects they point to. Best-effort per file — an object
+  // that's already gone (or fails to delete) never blocks the client
+  // deletion; it would otherwise leave the client stuck and undeletable.
+  const files = await listClientFiles(id);
+  for (const file of files) {
+    try {
+      await deleteObject(file.key);
+    } catch {
+      // Ignore: an orphaned R2 object is preferable to a client that can
+      // never be deleted.
+    }
+  }
 
   const db = getDb();
   await db.delete(clients).where(eq(clients.id, id));

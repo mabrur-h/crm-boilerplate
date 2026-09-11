@@ -94,4 +94,35 @@ export const clients = sqliteTable(
   ],
 );
 
-export const schema = { user, session, account, verification, clients };
+// Files attached to a client (M2b), stored in R2 (`FILES` binding, see
+// `src/lib/files.ts`) with only the object's metadata kept here. `key` is
+// the R2 object key and is unique so a row always maps to exactly one
+// object. Deleting a client cascades its file rows; deleting the uploading
+// user only detaches the row (`uploadedBy` -> null), it never deletes files.
+export const clientFiles = sqliteTable(
+  "client_files",
+  {
+    id: text("id").primaryKey(),
+    clientId: text("clientId")
+      .notNull()
+      .references(() => clients.id, { onDelete: "cascade" }),
+    key: text("key").notNull().unique(),
+    name: text("name").notNull(),
+    size: integer("size").notNull(),
+    contentType: text("contentType").notNull(),
+    uploadedBy: text("uploadedBy").references(() => user.id, {
+      onDelete: "set null",
+    }),
+    createdAt: integer("createdAt", { mode: "timestamp_ms" }).notNull(),
+  },
+  (table) => [index("client_files_client_id_idx").on(table.clientId)],
+);
+
+export const schema = {
+  user,
+  session,
+  account,
+  verification,
+  clients,
+  clientFiles,
+};

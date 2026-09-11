@@ -15,6 +15,13 @@
       "when": 1789151989258,
       "tag": "0001_gifted_patriot",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1789154948042,
+      "tag": "0002_dapper_freak",
+      "breakpoints": true
     }
   ]
 }
