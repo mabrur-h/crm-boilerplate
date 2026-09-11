@@ -23,8 +23,8 @@ export function DeleteClientButton({ id }: { id: string }) {
   const [isPending, startTransition] = useTransition();
 
   function handleDelete() {
-    startTransition(() => {
-      deleteClient(id);
+    startTransition(async () => {
+      await deleteClient(id);
     });
   }
 
