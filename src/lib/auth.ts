@@ -30,12 +30,23 @@ export function getAuth() {
     // this: multi-host deployments like Vercel previews) derives the base
     // URL from the incoming request's `Host` header per call and only needs
     // an allowlist of host patterns, so `allowedHosts: ["*"]` here means
-    // "trust whatever host this request actually arrived on" rather than
-    // widening a *separate* trust boundary — it doesn't touch
-    // `trustedOrigins` (left at its default), which is what actually gates
-    // cross-origin requests.
+    // "trust whatever host this request actually arrived on".
+    //
+    // `protocol: "auto"` is required, not cosmetic: a dynamic `baseURL`
+    // config also seeds `trustedOrigins` (see
+    // `node_modules/better-auth/dist/context/helpers.mjs`'s
+    // `getTrustedOrigins`), and it does so once, at startup, without a
+    // request to inspect — so it cannot sniff the scheme per call the way
+    // the per-request `baseURL` resolution does. Left at its default
+    // (`undefined`, meaning "https only"), every state-changing request over
+    // plain `http://` — i.e. every request in local `next dev`, which never
+    // terminates TLS — fails Better Auth's origin check with 403
+    // `INVALID_ORIGIN`. `"auto"` makes it seed both `https://*` and
+    // `http://*`, matching what `resolveDynamicBaseURL` already does per
+    // request; the trust boundary is still `allowedHosts`, unchanged.
     baseURL: {
       allowedHosts: ["*"],
+      protocol: "auto",
     },
     plugins: [nextCookies()],
   });
