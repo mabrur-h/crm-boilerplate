@@ -1,0 +1,2 @@
+# Copy this file to .dev.vars and fill in a real value for local development.
+BETTER_AUTH_SECRET=

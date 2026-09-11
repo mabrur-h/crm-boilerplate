@@ -1,0 +1,49 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // The name Cloudflare uses for this Worker.
+  "name": "crm-boilerplate",
+  // The entry file OpenNext builds for Cloudflare Workers.
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-11",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Static files (JS, CSS, images) the app serves directly.
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  // Lets the Worker call itself, which OpenNext needs for some Next.js features.
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "crm-boilerplate"
+    }
+  ],
+  // The app's SQL database (Cloudflare D1), used for clients, users, and other records.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "crm-boilerplate-db",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // File storage (Cloudflare R2), used for uploads like documents or photos.
+  "r2_buckets": [
+    {
+      "binding": "FILES",
+      "bucket_name": "crm-boilerplate-files"
+    }
+  ],
+  // Cloudflare's built-in AI models, callable straight from the Worker.
+  "ai": {
+    "binding": "AI"
+  },
+  // Plain-text settings available to the app at runtime.
+  "vars": {
+    "ALLOW_SIGNUP": "true"
+  },
+  // Sends logs and metrics to the Cloudflare dashboard.
+  "observability": {
+    "enabled": true
+  },
+  "upload_source_maps": true
+}
