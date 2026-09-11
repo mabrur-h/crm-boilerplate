@@ -1,11 +1,17 @@
 // Clients list: search + stage filter (via URL params) and the table/cards.
+import type { Metadata } from "next";
 import Link from "next/link";
+import { Plus, SearchX, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { EmptyState } from "@/components/empty-state";
+import { PageHeader } from "@/components/page-header";
 import { requireUser } from "@/lib/session";
 import { listClients } from "@/features/clients/queries";
 import { ClientsFilters } from "@/features/clients/components/clients-filters";
 import { ClientsTable } from "@/features/clients/components/clients-table";
 import { SavedToast } from "@/features/clients/components/saved-toast";
+
+export const metadata: Metadata = { title: "Mijozlar" };
 
 export default async function ClientsPage({
   searchParams,
@@ -20,35 +26,53 @@ export default async function ClientsPage({
   const hasFilter = Boolean(q || stage);
 
   return (
-    <div className="flex flex-col gap-4">
+    <>
       <SavedToast />
-      <div className="flex items-center justify-between gap-2">
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-          Mijozlar
-        </h1>
-        <Button asChild>
-          <Link href="/clients/new">Mijoz qo‘shish</Link>
+      <PageHeader
+        title="Mijozlar"
+        description={
+          clients.length > 0
+            ? `${clients.length} ta mijoz ko‘rsatilmoqda`
+            : undefined
+        }
+      >
+        <Button asChild size="lg" className="h-10 px-4">
+          <Link href="/clients/new">
+            <Plus aria-hidden="true" />
+            Mijoz qo‘shish
+          </Link>
         </Button>
+      </PageHeader>
+
+      <div className="flex flex-col gap-4">
+        <ClientsFilters />
+
+        {clients.length === 0 ? (
+          hasFilter ? (
+            <EmptyState
+              icon={SearchX}
+              title="Bu filtr bo‘yicha mijoz topilmadi."
+              description="Qidiruv so‘zini qisqartiring yoki bosqich filtrini tozalang."
+            />
+          ) : (
+            <EmptyState
+              icon={Users}
+              title="Hali mijoz yo‘q."
+              description="Birinchi mijozni qo‘shing."
+              action={
+                <Button asChild size="lg" className="h-10 px-4">
+                  <Link href="/clients/new">
+                    <Plus aria-hidden="true" />
+                    Mijoz qo‘shish
+                  </Link>
+                </Button>
+              }
+            />
+          )
+        ) : (
+          <ClientsTable clients={clients} />
+        )}
       </div>
-
-      <ClientsFilters />
-
-      {clients.length === 0 ? (
-        <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed p-10 text-center">
-          <p className="text-muted-foreground">
-            {hasFilter
-              ? "Bu filtr bo‘yicha mijoz topilmadi."
-              : "Hali mijoz yo‘q. Birinchi mijozni qo‘shing."}
-          </p>
-          {!hasFilter && (
-            <Button asChild>
-              <Link href="/clients/new">Mijoz qo‘shish</Link>
-            </Button>
-          )}
-        </div>
-      ) : (
-        <ClientsTable clients={clients} />
-      )}
-    </div>
+    </>
   );
 }

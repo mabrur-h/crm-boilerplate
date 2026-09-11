@@ -1,12 +1,34 @@
-// Dashboard: greeting + client stats + follow-up lists. Functional layout
-// only — visual polish is a later task.
+// Dashboard: greeting + client stats + follow-up lists.
+import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  CalendarClock,
+  CircleCheck,
+  CircleX,
+  Clock,
+  Sparkles,
+  UserPlus,
+  Users,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatUzDate, todayInTashkent } from "@/lib/dates";
+import { EmptyState } from "@/components/empty-state";
+import { PageHeader } from "@/components/page-header";
+import { formatUzDate, isDueOrOverdue, todayInTashkent } from "@/lib/dates";
 import { requireUser } from "@/lib/session";
 import { CLIENT_STAGES, type ClientStage } from "@/features/clients/constants";
 import { getDashboardData } from "@/features/clients/queries";
 import { StageBadge } from "@/features/clients/components/stage-badge";
+
+export const metadata: Metadata = { title: "Bosh sahifa" };
+
+// Presentation only — which glyph sits in the corner of each stat card.
+const STAGE_ICONS: Record<ClientStage, LucideIcon> = {
+  new: Sparkles,
+  in_progress: Clock,
+  won: CircleCheck,
+  lost: CircleX,
+};
 
 export default async function DashboardPage() {
   const user = await requireUser();
@@ -14,93 +36,135 @@ export default async function DashboardPage() {
   const today = todayInTashkent();
 
   const statCards = [
-    { label: "Jami", value: total },
+    { label: "Jami", value: total, icon: Users, accent: true },
     ...CLIENT_STAGES.map((stage) => ({
       label: stage.label,
       value: byStage[stage.value],
+      icon: STAGE_ICONS[stage.value],
+      accent: false,
     })),
   ];
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-          Bosh sahifa
-        </h1>
-        <p className="text-muted-foreground">Xush kelibsiz, {user.name}!</p>
-      </div>
+    <>
+      <PageHeader
+        title="Bosh sahifa"
+        description={`Xush kelibsiz, ${user.name}!`}
+      />
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {statCards.map((card) => (
-          <Card key={card.label}>
-            <CardHeader>
-              <CardTitle className="text-sm text-muted-foreground">
+          <Card key={card.label} className="gap-0 py-4 shadow-none">
+            <CardHeader className="px-4">
+              <CardTitle className="flex items-center justify-between gap-2 text-xs font-medium text-muted-foreground">
                 {card.label}
+                <card.icon
+                  aria-hidden="true"
+                  className={
+                    card.accent
+                      ? "size-4 text-primary"
+                      : "size-4 text-muted-foreground/70"
+                  }
+                />
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-2xl font-semibold text-foreground">
-              {card.value}
+            <CardContent className="px-4 pt-1">
+              <span className="tabular-figures text-3xl leading-none font-semibold tracking-tight text-foreground">
+                {card.value}
+              </span>
             </CardContent>
           </Card>
         ))}
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card>
+        <Card className="shadow-none">
           <CardHeader>
-            <CardTitle>Bugun bog‘lanish kerak</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <CalendarClock
+                aria-hidden="true"
+                className="size-4 text-muted-foreground"
+              />
+              Bugun bog‘lanish kerak
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {dueToday.length === 0 ? (
-              <p className="text-muted-foreground">
-                Bugun bog‘lanish kerak bo‘lgan mijoz yo‘q.
-              </p>
+              <EmptyState
+                icon={CalendarClock}
+                title="Bugun bog‘lanish kerak bo‘lgan mijoz yo‘q."
+                className="py-8"
+              />
             ) : (
-              <ul className="flex flex-col gap-3">
-                {dueToday.map((client) => (
-                  <li key={client.id}>
-                    <Link
-                      href={`/clients/${client.id}`}
-                      className="flex items-center justify-between gap-2 hover:underline"
-                    >
-                      <span className="flex items-center gap-2">
-                        <span className="text-foreground">{client.name}</span>
-                        <StageBadge stage={client.stage as ClientStage} />
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        {client.nextContactDate && client.nextContactDate < today
-                          ? "Muddati o‘tgan"
-                          : client.nextContactDate
-                            ? formatUzDate(client.nextContactDate)
-                            : null}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
+              <ul className="-my-1 flex flex-col divide-y divide-border">
+                {dueToday.map((client) => {
+                  const nextDate = client.nextContactDate;
+                  // `isDueOrOverdue` also covers "due exactly today", so
+                  // strictly-overdue is that minus today itself.
+                  const isOverdue =
+                    nextDate !== null &&
+                    nextDate !== today &&
+                    isDueOrOverdue(nextDate, today);
+
+                  return (
+                    <li key={client.id}>
+                      <Link
+                        href={`/clients/${client.id}`}
+                        className="-mx-2 flex min-h-10 items-center justify-between gap-3 rounded-md px-2 py-2.5 transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+                      >
+                        <span className="flex min-w-0 items-center gap-2">
+                          <span className="truncate font-medium text-foreground">
+                            {client.name}
+                          </span>
+                          <StageBadge stage={client.stage as ClientStage} />
+                        </span>
+                        {isOverdue ? (
+                          <span className="shrink-0 text-sm font-medium text-destructive">
+                            Muddati o‘tgan
+                          </span>
+                        ) : nextDate ? (
+                          <span className="shrink-0 text-sm text-muted-foreground">
+                            {formatUzDate(nextDate)}
+                          </span>
+                        ) : null}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="shadow-none">
           <CardHeader>
-            <CardTitle>Oxirgi qo‘shilganlar</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <UserPlus
+                aria-hidden="true"
+                className="size-4 text-muted-foreground"
+              />
+              Oxirgi qo‘shilganlar
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {recent.length === 0 ? (
-              <p className="text-muted-foreground">Hali mijoz yo‘q.</p>
+              <EmptyState
+                icon={Users}
+                title="Hali mijoz yo‘q."
+                className="py-8"
+              />
             ) : (
-              <ul className="flex flex-col gap-3">
+              <ul className="-my-1 flex flex-col divide-y divide-border">
                 {recent.map((client) => (
                   <li key={client.id}>
                     <Link
                       href={`/clients/${client.id}`}
-                      className="flex items-center justify-between gap-2 hover:underline"
+                      className="-mx-2 flex min-h-10 items-center justify-between gap-3 rounded-md px-2 py-2.5 transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
                     >
-                      <span className="flex items-center gap-2">
-                        <span className="text-foreground">{client.name}</span>
-                        <StageBadge stage={client.stage as ClientStage} />
+                      <span className="truncate font-medium text-foreground">
+                        {client.name}
                       </span>
+                      <StageBadge stage={client.stage as ClientStage} />
                     </Link>
                   </li>
                 ))}
@@ -109,6 +173,6 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </>
   );
 }

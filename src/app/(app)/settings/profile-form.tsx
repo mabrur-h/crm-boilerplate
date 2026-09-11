@@ -68,8 +68,13 @@ export function ProfileForm({
           <FieldLabel htmlFor="profile-email">Email</FieldLabel>
           <Input id="profile-email" value={email} readOnly disabled />
         </Field>
-        <Button type="submit" disabled={isPending} className="w-fit">
-          Saqlash
+        <Button
+          type="submit"
+          disabled={isPending}
+          size="lg"
+          className="h-10 w-fit px-4"
+        >
+          {isPending ? "Saqlanmoqda…" : "Saqlash"}
         </Button>
       </FieldGroup>
     </form>

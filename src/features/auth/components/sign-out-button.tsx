@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 
@@ -21,10 +22,11 @@ export function SignOutButton() {
     <Button
       type="button"
       variant="outline"
-      size="sm"
       disabled={isPending}
       onClick={handleSignOut}
+      className="h-9 w-full justify-start"
     >
+      <LogOut aria-hidden="true" />
       Chiqish
     </Button>
   );

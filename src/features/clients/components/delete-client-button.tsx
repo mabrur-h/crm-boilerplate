@@ -16,6 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { deleteClient } from "@/features/clients/actions";
 
@@ -31,7 +32,14 @@ export function DeleteClientButton({ id }: { id: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button type="button" variant="destructive" disabled={isPending}>
+        <Button
+          type="button"
+          variant="destructive"
+          disabled={isPending}
+          size="lg"
+          className="h-10 px-4"
+        >
+          <Trash2 aria-hidden="true" />
           O‘chirish
         </Button>
       </AlertDialogTrigger>

@@ -3,13 +3,15 @@
 import { Badge } from "@/components/ui/badge";
 import { stageLabel, type ClientStage } from "@/features/clients/constants";
 
+// Emphasis follows the funnel: quiet while a lead is still moving, loud once
+// it is decided. `won` gets the brand fill, `lost` the destructive tint.
 const STAGE_VARIANTS: Record<
   ClientStage,
   "secondary" | "default" | "outline" | "destructive"
 > = {
-  new: "secondary",
-  in_progress: "default",
-  won: "outline",
+  new: "outline",
+  in_progress: "secondary",
+  won: "default",
   lost: "destructive",
 };
 

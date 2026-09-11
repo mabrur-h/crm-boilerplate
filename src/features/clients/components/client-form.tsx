@@ -146,11 +146,23 @@ export function ClientForm({
           </p>
         )}
 
-        <div className="flex gap-2">
-          <Button type="submit" disabled={isPending}>
-            Saqlash
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="submit"
+            disabled={isPending}
+            size="lg"
+            className="h-10 px-4"
+          >
+            {isPending ? "Saqlanmoqda…" : "Saqlash"}
           </Button>
-          <Button type="button" variant="outline" disabled={isPending} asChild>
+          <Button
+            type="button"
+            variant="outline"
+            disabled={isPending}
+            asChild
+            size="lg"
+            className="h-10 px-4"
+          >
             <Link href="/clients">Bekor qilish</Link>
           </Button>
         </div>

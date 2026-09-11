@@ -6,6 +6,7 @@
 
 import { useActionState, useEffect, useRef, useTransition } from "react";
 import { toast } from "sonner";
+import { Download, Paperclip, Trash2, Upload } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,6 +20,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { EmptyState } from "@/components/empty-state";
 import { formatUzDate, todayInTashkent } from "@/lib/dates";
 import { formatFileSize, validateUpload } from "@/lib/files";
 import {
@@ -84,9 +86,10 @@ function UploadForm({ clientId }: { clientId: string }) {
         name="file"
         aria-label="Fayl tanlash"
         disabled={isPending}
-        className="min-w-0 flex-1 text-sm text-foreground file:mr-2 file:rounded-md file:border-0 file:bg-secondary file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-secondary-foreground"
+        className="min-w-0 flex-1 rounded-lg text-sm text-foreground file:mr-2 file:rounded-md file:border-0 file:bg-secondary file:px-3 file:py-2 file:text-sm file:font-medium file:text-secondary-foreground hover:file:bg-accent focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
       />
-      <Button type="submit" disabled={isPending}>
+      <Button type="submit" disabled={isPending} size="lg" className="h-10 px-4">
+        <Upload aria-hidden="true" />
         {isPending ? "Yuklanmoqda…" : "Fayl yuklash"}
       </Button>
     </form>
@@ -110,8 +113,15 @@ function DeleteFileButton({ file }: { file: ClientFile }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button type="button" variant="ghost" size="sm" disabled={isPending}>
-          O‘chirish
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-sm"
+          disabled={isPending}
+          aria-label={`${file.name} faylini o‘chirish`}
+          className="text-muted-foreground hover:text-destructive"
+        >
+          <Trash2 aria-hidden="true" />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -144,26 +154,32 @@ export function ClientFiles({
   files: ClientFile[];
 }) {
   return (
-    <Card>
+    <Card className="shadow-none">
       <CardHeader>
-        <CardTitle>Fayllar</CardTitle>
+        <CardTitle className="flex items-center gap-2 text-base">
+          <Paperclip aria-hidden="true" className="size-4 text-muted-foreground" />
+          Fayllar
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <UploadForm clientId={clientId} />
 
         {files.length === 0 ? (
-          <p className="text-sm text-muted-foreground">
-            Hali fayl yuklanmagan.
-          </p>
+          <EmptyState
+            icon={Paperclip}
+            title="Hali fayl yuklanmagan."
+            description="Shartnoma yoki hisob-fakturani shu yerga qo‘shing."
+            className="py-8"
+          />
         ) : (
           <ul className="flex flex-col divide-y divide-border">
             {files.map((file) => (
               <li
                 key={file.id}
-                className="flex flex-wrap items-center justify-between gap-2 py-2"
+                className="flex flex-wrap items-center justify-between gap-2 py-2.5"
               >
                 <div className="flex min-w-0 flex-col gap-0.5">
-                  <span className="truncate text-sm text-foreground">
+                  <span className="truncate text-sm font-medium text-foreground">
                     {file.name}
                   </span>
                   <span className="text-xs text-muted-foreground">
@@ -172,8 +188,19 @@ export function ClientFiles({
                   </span>
                 </div>
                 <div className="flex shrink-0 items-center gap-1">
-                  <Button asChild type="button" variant="ghost" size="sm">
-                    <a href={`/api/files/${file.id}`}>Yuklab olish</a>
+                  <Button
+                    asChild
+                    type="button"
+                    variant="ghost"
+                    size="icon-sm"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <a
+                      href={`/api/files/${file.id}`}
+                      aria-label={`${file.name} faylini yuklab olish`}
+                    >
+                      <Download aria-hidden="true" />
+                    </a>
                   </Button>
                   <DeleteFileButton file={file} />
                 </div>

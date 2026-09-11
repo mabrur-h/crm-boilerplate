@@ -6,6 +6,7 @@
 
 import { Suspense, useEffect, useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -76,18 +77,27 @@ function ClientsFiltersInner() {
 
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-      <Input
-        placeholder="Ism, telefon yoki kompaniya bo‘yicha qidirish"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        className="sm:max-w-xs"
-        aria-label="Mijozlarni qidirish"
-      />
+      <div className="relative sm:max-w-xs sm:flex-1">
+        <Search
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
+        />
+        <Input
+          placeholder="Ism, telefon yoki kompaniya bo‘yicha qidirish"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          className="pl-8"
+          aria-label="Mijozlarni qidirish"
+        />
+      </div>
       <Select
         value={searchParams.get("stage") ?? ALL_STAGES_VALUE}
         onValueChange={(value) => updateParams({ stage: value })}
       >
-        <SelectTrigger className="sm:w-48" aria-label="Bosqich bo‘yicha filtr">
+        <SelectTrigger
+          className="w-full sm:w-48"
+          aria-label="Bosqich bo‘yicha filtr"
+        >
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
