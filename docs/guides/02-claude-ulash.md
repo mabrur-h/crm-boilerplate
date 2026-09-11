@@ -153,7 +153,7 @@ Qayerda to‘xtagan edik? docs/TASKS.md va docs/PROGRESS.md’ni o‘qi, git log
 keyin joriy vazifani va uning tayyorlik shartini ayt. Kodni o‘zgartirma.
 ```
 
-Ko‘proq tayyor so‘rovlar: [docs/prompts/claude.md](../prompts/claude.md).
+Ko‘proq tayyor so‘rovlar: [docs/prompts/claude-code.md](../prompts/claude-code.md).
 
 ## Muammo bo‘lsa
 

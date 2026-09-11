@@ -54,7 +54,7 @@ Ularni manbadan qaytadan yuklash uchun:
 npm run skills:update
 ```
 
-**Tekshiring:** `.agents/skills/` papkasini oching — jami 19 ta papka bo‘ladi: to‘qqiztasi loyihanikidir, o‘ntasi ko‘chirib olingan.
+**Tekshiring:** `.agents/skills/` papkasini oching — jami 19 ta papka bo‘ladi: to‘qqiztasi loyihaniki, o‘ntasi ko‘chirib olingan.
 
 ## 3-qadam. Uchta buyruqni eslab qoling
 
@@ -184,4 +184,4 @@ Barcha muammolar: [08-muammolar.md](08-muammolar.md).
 
 ## Keyingi qadam
 
-Tayyor so‘rovlar to‘plamini oling: [docs/prompts/claude.md](../prompts/claude.md) yoki [docs/prompts/chatgpt.md](../prompts/chatgpt.md).
+Tayyor so‘rovlar to‘plamini oling: [docs/prompts/claude-code.md](../prompts/claude-code.md) yoki [docs/prompts/chatgpt.md](../prompts/chatgpt.md).

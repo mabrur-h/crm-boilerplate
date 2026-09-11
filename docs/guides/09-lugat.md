@@ -20,7 +20,7 @@ So‘zlar alifbo tartibida. Har biri ikki jumladan oshmaydi. Loyihaga tegishli j
 
 **Binding** — Worker ichidan tashqi resursga beriladigan qisqa nom. Kodda `env.DB` deb yozasiz, Cloudflare buni haqiqiy bazaga ulaydi. Ro‘yxati `wrangler.jsonc` faylida.
 
-**Branch (shox)** — kodning parallel yo‘nalishi. Asosiy yo‘nalishga tegmasdan biror narsani sinab ko‘rish uchun ishlatiladi.
+**Branch (tarmoq)** — kodning parallel yo‘nalishi. Asosiy yo‘nalishga tegmasdan biror narsani sinab ko‘rish uchun ishlatiladi.
 
 **Build (yig‘ish)** — kodni brauzer va server tushunadigan ko‘rinishga aylantirish. Buyrug‘i: `npm run build`.
 
@@ -108,7 +108,7 @@ So‘zlar alifbo tartibida. Har biri ikki jumladan oshmaydi. Loyihaga tegishli j
 
 **Repozitoriya (repo)** — loyihaning bir butun kod ombori. Sizniki GitHub akkauntingizda turadi.
 
-**Revert** — biror commit’ning ta’sirini bekor qiladigan yangi commit yasash. Tarixni o‘chirmaydi, ustiga yozadi.
+**Revert** — biror commit’ning ta’sirini bekor qiladigan yangi commit yasash. Tarixni o‘chirmaydi — ustiga yangi commit qo‘shadi.
 
 ## S
 

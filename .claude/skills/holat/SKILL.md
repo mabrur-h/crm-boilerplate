@@ -15,7 +15,7 @@ Quyidagilarni tartib bilan o‘qing (mavjud bo‘lsa):
 2. `docs/FLOW.md` — asosiy foydalanuvchi oqimlari.
 3. `docs/PLAN.md` — bosqichlar rejasi.
 4. `docs/TASKS.md` — hozirgi vazifa va uning "Tayyor, agar" mezonlari.
-5. `docs/PROGRESS.md` — oxirgi yozuvlar (охирги 3-5 tasi yetarli).
+5. `docs/PROGRESS.md` — oxirgi yozuvlar (3-5 tasi yetarli).
 
 ## 2. Git holatini tekshirish
 

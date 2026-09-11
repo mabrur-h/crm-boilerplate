@@ -38,7 +38,7 @@ Agentga ish topshirishdan oldin odatda `PRODUCT.md`, `FLOW.md` va `TASKS.md` yet
 
 | Fayl | Nima uchun |
 | --- | --- |
-| [prompts/claude.md](prompts/claude.md) | Claude Code uchun nusxalab qo‘yiladigan so‘rovlar to‘plami |
+| [prompts/claude-code.md](prompts/claude-code.md) | Claude Code uchun nusxalab qo‘yiladigan so‘rovlar to‘plami |
 | [prompts/chatgpt.md](prompts/chatgpt.md) | ChatGPT / Codex uchun nusxalab qo‘yiladigan so‘rovlar to‘plami |
 
 ## Yangi suhbatni boshlash

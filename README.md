@@ -132,7 +132,7 @@ MCP serverlari — bu agentga tashqi vositalarni ulaydigan ko‘prik. Loyihada u
 | `shadcn` | shadcn/ui komponentlarini qidiradi, ko‘rsatadi va loyihaga qo‘shadi |
 | `playwright` | Haqiqiy brauzerni boshqaradi: sahifani ochadi, tugmani bosadi, natijani tekshiradi |
 
-Ulash yo‘riqnomalari: [02-claude-ulash.md](docs/guides/02-claude-ulash.md), [03-chatgpt-ulash.md](docs/guides/03-chatgpt-ulash.md). Skill’lar haqida batafsil: [10-skilllar.md](docs/guides/10-skilllar.md). Tayyor promptlar: [docs/prompts/claude.md](docs/prompts/claude.md), [docs/prompts/chatgpt.md](docs/prompts/chatgpt.md).
+Ulash yo‘riqnomalari: [02-claude-ulash.md](docs/guides/02-claude-ulash.md), [03-chatgpt-ulash.md](docs/guides/03-chatgpt-ulash.md). Skill’lar haqida batafsil: [10-skilllar.md](docs/guides/10-skilllar.md). Tayyor promptlar: [docs/prompts/claude-code.md](docs/prompts/claude-code.md), [docs/prompts/chatgpt.md](docs/prompts/chatgpt.md).
 
 ## Asosiy buyruqlar
 

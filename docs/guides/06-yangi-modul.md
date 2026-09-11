@@ -10,7 +10,7 @@ Misol uchun oladigan bo‘limimiz — **Mahsulotlar**, maydonlari: nomi, narxi (
 
 - Ishlaydigan loyiha va `npm run dev` — [01-template-olish.md](01-template-olish.md).
 - Ulangan AI agenti — [02-claude-ulash.md](02-claude-ulash.md) yoki [03-chatgpt-ulash.md](03-chatgpt-ulash.md).
-- Yarim soatlik xotirjam vaqt: har qadamdan keyin natijani o‘zingiz ko‘rasiz.
+- Shoshilmasdan ishlash imkoni: har qadamdan keyin natijani o‘zingiz ko‘rasiz.
 
 Ishni bitta buyruq bilan boshlash mumkin: Claude Code’da `/yangi-modul`, Codex’da "Mahsulotlar bo‘limini qo‘shamiz" deb yozing. Skill quyidagi qadamlarni o‘zi bajaradi. Quyida esa har bir qadam alohida yozilgan — shunda nima bo‘layotganini kuzatib borasiz.
 

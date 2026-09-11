@@ -19,7 +19,7 @@ Bu buyruq hech narsani o‘zgartirmaydi, faqat tekshiradi.
 - Mac’da: `zsh: command not found: node`
 - Windows’da: `'node' is not recognized as an internal or external command, operable program or batch file.`
 
-**Sababi.** Node.js o‘rnatilmagan, yoki o‘rnatilgan-u, terminal uni hali ko‘rmayapti. Terminal o‘zi ochilgan paytdagi ro‘yxatni eslab qoladi.
+**Sababi.** Node.js o‘rnatilmagan, yoki o‘rnatilgan-u, terminal uni hali ko‘rmayapti. Terminal o‘zi ochilgan paytdagi dasturlar ro‘yxatini eslab qoladi.
 
 **Yechim.** Avval VS Code’ni butunlay yoping va qaytadan oching, so‘ng yangi terminal oching (**Terminal → New Terminal**) va buyruqni takrorlang. Baribir topilmasa, https://nodejs.org/en/download sahifasidan **LTS** variantini (hozir 24) o‘rnating. Batafsil: [00-kompyuter-tayyorlash.md](00-kompyuter-tayyorlash.md).
 
