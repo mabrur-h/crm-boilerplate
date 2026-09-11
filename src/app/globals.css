@@ -175,7 +175,10 @@
     [data-slot="input"],
     [data-slot="textarea"],
     [data-slot="select-trigger"],
-    [data-slot="button"] {
+    [data-slot="button"],
+    /* These two render as buttons but override the slot name. */
+    [data-slot="alert-dialog-action"],
+    [data-slot="alert-dialog-cancel"] {
       min-height: 2.5rem;
     }
     [data-slot="button"][data-size^="icon"] {

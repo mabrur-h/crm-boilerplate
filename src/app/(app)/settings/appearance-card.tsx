@@ -14,7 +14,7 @@ export function AppearanceCard() {
   return (
     <div
       role="radiogroup"
-      aria-label="Mavzu"
+      aria-label="Ko‘rinish"
       className="grid grid-cols-3 gap-2"
     >
       {THEME_OPTIONS.map((option) => {

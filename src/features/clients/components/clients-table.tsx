@@ -34,12 +34,17 @@ export function ClientsTable({ clients }: { clients: Client[] }) {
             {clients.map((client) => (
               <TableRow
                 key={client.id}
-                className="relative cursor-pointer has-[a:focus-visible]:bg-muted"
+                // The whole row is the target, so the focus ring has to be
+                // drawn on the row. Full-opacity `--ring` (not shadcn's /50
+                // halo, which has a full-opacity border under it): a row has
+                // no border to tint, and the indicator has to clear 3:1
+                // against both the row fill and the surrounding card.
+                className="relative cursor-pointer has-[a:focus-visible]:bg-muted has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-ring has-[a:focus-visible]:ring-inset"
               >
                 <TableCell className="font-medium text-foreground">
                   <Link
                     href={`/clients/${client.id}`}
-                    className="absolute inset-0 rounded-none focus-visible:outline-none"
+                    className="absolute inset-0 rounded-none outline-none"
                     aria-label={client.name}
                   />
                   <span className="relative">{client.name}</span>

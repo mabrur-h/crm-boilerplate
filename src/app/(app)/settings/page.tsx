@@ -26,7 +26,7 @@ export default async function SettingsPage() {
           <CardHeader>
             <CardTitle>Profil</CardTitle>
             <CardDescription>
-              Ismingiz ilova ichida ko‘rinadi. Email o‘zgartirilmaydi.
+              Ismingiz ilovada ko‘rinadi. Email o‘zgartirilmaydi.
             </CardDescription>
           </CardHeader>
           <CardContent>

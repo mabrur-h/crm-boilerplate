@@ -33,7 +33,7 @@ export function ThemeToggle({ className }: { className?: string }) {
           type="button"
           variant="ghost"
           size="icon"
-          aria-label="Mavzuni o‘zgartirish"
+          aria-label="Ko‘rinishni o‘zgartirish"
           className={className ?? "size-10"}
         >
           <TriggerIcon aria-hidden="true" />

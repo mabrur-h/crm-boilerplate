@@ -11,19 +11,19 @@ const FEATURES = [
     icon: Users,
     title: "Mijozlar va bosqichlar",
     description:
-      "Qidiruv, filtr va keyingi aloqa sanasi — kim bilan bugun gaplashish kerakligi bir qarashda ko‘rinadi.",
+      "Qidiruv, filtr va keyingi aloqa sanasi — bugun kim bilan gaplashish kerakligi bir qarashda ko‘rinadi.",
   },
   {
     icon: FolderLock,
     title: "Fayllar xavfsiz saqlanadi",
     description:
-      "Shartnoma va hisob-fakturalar Cloudflare R2’da turadi, har bir fayl faqat o‘z mijoziga bog‘langan.",
+      "Shartnoma va hisob-fakturalar Cloudflare R2’da saqlanadi. Har bir fayl faqat o‘z mijoziga biriktiriladi.",
   },
   {
     icon: Bot,
     title: "AI yordamchi",
     description:
-      "Mijozga xabar qoralamasini yozadi. Siz tahrirlaysiz, tekshirasiz va keyin yuborasiz.",
+      "Mijozga xabar qoralamasini yozadi. Siz tekshirasiz, tahrirlaysiz va keyin yuborasiz.",
   },
 ];
 
@@ -79,7 +79,7 @@ export default function LandingPage() {
       >
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <h2 className="max-w-xl text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            Ichida nima bor
+            Asosiy imkoniyatlar
           </h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {FEATURES.map((feature) => (

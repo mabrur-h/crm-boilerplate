@@ -23,7 +23,7 @@ export default function MarketingLayout({
           </Link>
 
           <nav
-            aria-label="Asosiy"
+            aria-label="Asosiy menyu"
             className="ml-auto flex items-center gap-3 text-sm sm:gap-5"
           >
             <a
