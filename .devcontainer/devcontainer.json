@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+  "name": "crm-boilerplate",
+  // Verified available tag: https://mcr.microsoft.com/en-us/artifact/mar/devcontainers/javascript-node/tag/24
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
+  "postCreateCommand": "npm ci && npm run setup",
+  "forwardPorts": [3000, 8976],
+  "portsAttributes": {
+    "3000": {
+      "label": "CRM (next dev)",
+      "onAutoForward": "openPreview"
+    },
+    "8976": {
+      "label": "Wrangler login callback",
+      "onAutoForward": "silent"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss",
+        "anthropic.claude-code",
+        "openai.chatgpt"
+      ]
+    }
+  }
+}

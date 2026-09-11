@@ -20,7 +20,11 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate:local": "wrangler d1 migrations apply crm-boilerplate-db --local",
     "db:migrate:remote": "wrangler d1 migrations apply crm-boilerplate-db --remote",
-    "db:seed": "node scripts/seed.mjs"
+    "db:seed": "node scripts/seed.mjs",
+    "setup": "node scripts/setup.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "cf:setup": "node scripts/cf-setup.mjs",
+    "r2:check": "node scripts/r2-check.mjs"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "1.20.6",
