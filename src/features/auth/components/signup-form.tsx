@@ -101,8 +101,13 @@ export function SignupForm() {
             {formError}
           </p>
         )}
-        <Button type="submit" disabled={isPending}>
-          Ro‘yxatdan o‘tish
+        <Button
+          type="submit"
+          disabled={isPending}
+          size="lg"
+          className="h-10 w-full"
+        >
+          {isPending ? "Yaratilmoqda…" : "Ro‘yxatdan o‘tish"}
         </Button>
       </FieldGroup>
     </form>

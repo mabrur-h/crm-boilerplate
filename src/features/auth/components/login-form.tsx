@@ -88,8 +88,13 @@ export function LoginForm() {
             {formError}
           </p>
         )}
-        <Button type="submit" disabled={isPending}>
-          Kirish
+        <Button
+          type="submit"
+          disabled={isPending}
+          size="lg"
+          className="h-10 w-full"
+        >
+          {isPending ? "Kirilmoqda…" : "Kirish"}
         </Button>
       </FieldGroup>
     </form>
