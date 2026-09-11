@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, index } from "drizzle-orm/sqlite-core";
 
 // Better Auth core tables for the sqlite/D1 adapter (better-auth 1.7.4).
 //
@@ -66,4 +66,32 @@ export const verification = sqliteTable("verification", {
   updatedAt: integer("updatedAt", { mode: "timestamp" }).notNull(),
 });
 
-export const schema = { user, session, account, verification };
+// The `clients` table for the M2a Clients module (single-team model: every
+// logged-in user shares the same client list — see the comment in
+// `src/features/clients/queries.ts`). `stage` is a free-form text column
+// constrained in application code (zod, `src/features/clients/schema.ts`)
+// rather than a SQL CHECK constraint, matching drizzle-kit's sqlite output.
+export const clients = sqliteTable(
+  "clients",
+  {
+    id: text("id").primaryKey(),
+    name: text("name").notNull(),
+    phone: text("phone"),
+    company: text("company"),
+    note: text("note"),
+    stage: text("stage").notNull().default("new"),
+    // Calendar day only, `YYYY-MM-DD`, no time component.
+    nextContactDate: text("nextContactDate"),
+    createdBy: text("createdBy").references(() => user.id, {
+      onDelete: "set null",
+    }),
+    createdAt: integer("createdAt", { mode: "timestamp_ms" }).notNull(),
+    updatedAt: integer("updatedAt", { mode: "timestamp_ms" }).notNull(),
+  },
+  (table) => [
+    index("clients_stage_idx").on(table.stage),
+    index("clients_next_contact_date_idx").on(table.nextContactDate),
+  ],
+);
+
+export const schema = { user, session, account, verification, clients };

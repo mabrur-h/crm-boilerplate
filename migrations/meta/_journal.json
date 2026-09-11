@@ -8,6 +8,13 @@
       "when": 1789150849604,
       "tag": "0000_woozy_power_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1789151989258,
+      "tag": "0001_gifted_patriot",
+      "breakpoints": true
     }
   ]
 }
