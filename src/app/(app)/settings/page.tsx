@@ -1,24 +1,51 @@
-// Settings page: profile card (rename), currently the only setting.
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// Settings page: profile card (rename) + appearance (theme) card.
+import type { Metadata } from "next";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { PageHeader } from "@/components/page-header";
 import { requireUser } from "@/lib/session";
 import { ProfileForm } from "@/app/(app)/settings/profile-form";
+import { AppearanceCard } from "@/app/(app)/settings/appearance-card";
+
+export const metadata: Metadata = { title: "Sozlamalar" };
 
 export default async function SettingsPage() {
   const user = await requireUser();
 
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-        Sozlamalar
-      </h1>
-      <Card className="max-w-md">
-        <CardHeader>
-          <CardTitle>Profil</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ProfileForm name={user.name} email={user.email} />
-        </CardContent>
-      </Card>
-    </div>
+    <>
+      <PageHeader title="Sozlamalar" />
+
+      <div className="grid max-w-4xl gap-4 md:grid-cols-2">
+        <Card className="shadow-none">
+          <CardHeader>
+            <CardTitle>Profil</CardTitle>
+            <CardDescription>
+              Ismingiz ilova ichida ko‘rinadi. Email o‘zgartirilmaydi.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ProfileForm name={user.name} email={user.email} />
+          </CardContent>
+        </Card>
+
+        <Card className="h-fit shadow-none">
+          <CardHeader>
+            <CardTitle>Ko‘rinish</CardTitle>
+            <CardDescription>
+              «Tizim» qurilmangiz sozlamasiga moslashadi.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <AppearanceCard />
+          </CardContent>
+        </Card>
+      </div>
+    </>
   );
 }

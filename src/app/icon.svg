@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="CRM">
+  <!-- Brand color: sRGB equivalent of oklch(0.48 0.085 196) in globals.css. -->
+  <rect width="32" height="32" rx="7" fill="#006c6d"/>
+  <circle cx="16" cy="12" r="4.6" fill="#ffffff"/>
+  <rect x="7.4" y="19.2" width="17.2" height="9.4" rx="4.7" fill="#ffffff"/>
+</svg>
