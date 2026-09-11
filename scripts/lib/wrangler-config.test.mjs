@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { getD1DatabaseId, setD1DatabaseId } from "./wrangler-config.mjs";
+import { diffConfigText, formatConfigDiff, getD1DatabaseId, setD1DatabaseId } from "./wrangler-config.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 // A byte-for-byte copy of the real wrangler.jsonc, including its comments —
@@ -74,5 +74,63 @@ describe("setD1DatabaseId", () => {
 describe("getD1DatabaseId", () => {
   it("returns null when no database_id is set yet", () => {
     expect(getD1DatabaseId(FIXTURE)).toBeNull();
+  });
+});
+
+describe("diffConfigText / formatConfigDiff", () => {
+  it("reports no changes when the two texts are identical", () => {
+    expect(diffConfigText(FIXTURE, FIXTURE).some((entry) => entry.type !== "context")).toBe(false);
+    expect(formatConfigDiff(FIXTURE, FIXTURE)).toEqual([]);
+  });
+
+  it("reports the real single-line case: inserting database_id", () => {
+    const withId = setD1DatabaseId(FIXTURE, { databaseId: "11111111-1111-1111-1111-111111111111" });
+
+    const lines = formatConfigDiff(FIXTURE, withId);
+
+    // Exactly one line added, nothing removed, and every other line in the
+    // file (including comments) is untouched context.
+    expect(lines).toEqual(['+ "database_id": "11111111-1111-1111-1111-111111111111",']);
+    const entries = diffConfigText(FIXTURE, withId);
+    expect(entries.filter((e) => e.type === "removed")).toEqual([]);
+    expect(entries.filter((e) => e.type === "context").length).toBe(
+      FIXTURE.split("\n").length,
+    );
+  });
+
+  it("reports the real single-line case: updating an existing database_id", () => {
+    const withOldId = setD1DatabaseId(FIXTURE, { databaseId: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" });
+    const withNewId = setD1DatabaseId(withOldId, { databaseId: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb" });
+
+    expect(formatConfigDiff(withOldId, withNewId)).toEqual([
+      '- "database_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",',
+      '+ "database_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",',
+    ]);
+  });
+
+  it("reports each changed line correctly when more than one line changes", () => {
+    // This is exactly the case a naive set-difference gets wrong: two
+    // distinct lines change, and (deliberately) one of the new lines'
+    // text duplicates a line that still exists unchanged elsewhere in the
+    // file, which would confuse a `filter(l => !newLines.includes(l))`
+    // approach into thinking nothing changed there.
+    const oldText = ['"a": "1",', '"b": "2",', '"c": "3",', '"a": "1",'].join("\n");
+    const newText = ['"a": "1",', '"b": "20",', '"c": "30",', '"a": "1",'].join("\n");
+
+    // Both changed lines are reported (nothing is hidden or misattributed
+    // to the unrelated duplicate `"a": "1",` line before or after them).
+    expect(formatConfigDiff(oldText, newText)).toEqual([
+      '- "b": "2",',
+      '- "c": "3",',
+      '+ "b": "20",',
+      '+ "c": "30",',
+    ]);
+  });
+
+  it("treats an added trailing line as a pure addition, not a scrambled diff", () => {
+    const oldText = ["line one", "line two"].join("\n");
+    const newText = ["line one", "line two", "line three"].join("\n");
+
+    expect(formatConfigDiff(oldText, newText)).toEqual(["+ line three"]);
   });
 });

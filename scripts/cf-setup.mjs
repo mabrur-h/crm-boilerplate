@@ -18,7 +18,7 @@ import {
   parseWhoami,
   R2_BILLING_HINT,
 } from "./lib/wrangler-cli.mjs";
-import { setD1DatabaseId } from "./lib/wrangler-config.mjs";
+import { formatConfigDiff, setD1DatabaseId } from "./lib/wrangler-config.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -50,23 +50,14 @@ async function confirm(question) {
   }
 }
 
-function diffLines(oldText, newText) {
-  const oldLines = oldText.split("\n");
-  const newLines = newText.split("\n");
-  const removed = oldLines.filter((line) => !newLines.includes(line));
-  const added = newLines.filter((line) => !oldLines.includes(line));
-  return { removed, added };
-}
-
 function printWranglerJsoncDiff(oldText, newText) {
-  if (oldText === newText) {
+  const changedLines = formatConfigDiff(oldText, newText);
+  if (changedLines.length === 0) {
     console.log("   (wrangler.jsonc allaqachon to‘g‘ri qiymatga ega — o‘zgarish yo‘q)");
     return;
   }
-  const { removed, added } = diffLines(oldText, newText);
   console.log("   wrangler.jsonc o‘zgarishi:");
-  for (const line of removed) console.log(`   - ${line.trim()}`);
-  for (const line of added) console.log(`   + ${line.trim()}`);
+  for (const line of changedLines) console.log(`   ${line}`);
 }
 
 function writeDatabaseId(databaseId) {

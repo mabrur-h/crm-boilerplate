@@ -154,3 +154,65 @@ export function getD1DatabaseId(sourceText, { binding = "DB" } = {}) {
   const match = /"database_id"\s*:\s*"([^"]*)"/.exec(objectText);
   return match ? match[1] : null;
 }
+
+/**
+ * Line-based diff between two versions of a config file, used to preview a
+ * `--dry-run` change before writing it. A proper LCS (longest common
+ * subsequence) diff rather than a naive set-difference: a set-difference
+ * (`oldLines.filter(l => !newLines.includes(l))`) misattributes changes as
+ * soon as two or more lines differ, or a line's text happens to repeat
+ * elsewhere in the file — LCS instead finds the actual minimal edit, so a
+ * multi-line change is reported line-by-line and correctly, not as a
+ * scrambled bag of "some line removed / some line added".
+ *
+ * @param {string} oldText
+ * @param {string} newText
+ * @returns {Array<{ type: "context"|"removed"|"added", line: string }>}
+ */
+export function diffConfigText(oldText, newText) {
+  const oldLines = oldText.split("\n");
+  const newLines = newText.split("\n");
+  const n = oldLines.length;
+  const m = newLines.length;
+
+  // dp[i][j] = length of the LCS of oldLines[i..] and newLines[j..].
+  const dp = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+  for (let i = n - 1; i >= 0; i--) {
+    for (let j = m - 1; j >= 0; j--) {
+      dp[i][j] =
+        oldLines[i] === newLines[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    }
+  }
+
+  const entries = [];
+  let i = 0;
+  let j = 0;
+  while (i < n && j < m) {
+    if (oldLines[i] === newLines[j]) {
+      entries.push({ type: "context", line: oldLines[i] });
+      i++;
+      j++;
+    } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+      entries.push({ type: "removed", line: oldLines[i] });
+      i++;
+    } else {
+      entries.push({ type: "added", line: newLines[j] });
+      j++;
+    }
+  }
+  while (i < n) entries.push({ type: "removed", line: oldLines[i++] });
+  while (j < m) entries.push({ type: "added", line: newLines[j++] });
+
+  return entries;
+}
+
+/**
+ * Formats the non-context lines of a `diffConfigText` result as
+ * `"- old line"` / `"+ new line"` strings, ready to print. Returns an
+ * empty array when the two texts are identical.
+ */
+export function formatConfigDiff(oldText, newText) {
+  return diffConfigText(oldText, newText)
+    .filter((entry) => entry.type !== "context")
+    .map((entry) => `${entry.type === "removed" ? "-" : "+"} ${entry.line.trim()}`);
+}
