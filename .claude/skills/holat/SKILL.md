@@ -36,7 +36,7 @@ Foydalanuvchiga quyidagi tuzilishda, Uzbek tilida qisqa javob bering:
 
 ## To‘xta va so‘ra
 
-Agar hujjatlar (`docs/TASKS.md`, `docs/PROGRESS.md`) umuman topilmasa yoki bo‘sh bo‘lsa, buni foydalanuvchiga ayting va `boshlash` skill'ini taklif qiling — o‘zingiz hujjat yarata boshlamang.
+Agar hujjatlar (`docs/TASKS.md`, `docs/PROGRESS.md`) umuman topilmasa yoki bo‘sh bo‘lsa, buni foydalanuvchiga ayting va `boshlash` skill’ini taklif qiling — o‘zingiz hujjat yarata boshlamang.
 
 ## Tekshiruv
 

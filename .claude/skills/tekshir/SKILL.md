@@ -25,15 +25,15 @@ Bu lint, typecheck, test va `skills:check`ni ishga tushiradi. Xato chiqsa, keyin
 ## 3. Responsive va tema tekshiruvi
 
 - Ekranni 390px kenglikka o‘zgartirib, joylashuv buzilmaganini tekshiring.
-- Dark mode'ni yoqib, matn/rang kontrastini tekshiring.
+- Dark mode’ni yoqib, matn/rang kontrastini tekshiring.
 
-## 4. Server'ni to‘xtatish
+## 4. Server’ni to‘xtatish
 
-Tekshiruv tugagach, ishga tushirgan `npm run dev` yoki `npm run preview` server'larini albatta to‘xtating.
+Tekshiruv tugagach, ishga tushirgan `npm run dev` yoki `npm run preview` server’larini albatta to‘xtating.
 
 ## To‘xta va so‘ra
 
-Agar tekshiruv paytida kutilmagan xato chiqsa (masalan, 500 xatosi, konsolda qizil xato), taxminiy tuzatishni sinab ko‘rishdan oldin `xato` skill'iga o‘ting.
+Agar tekshiruv paytida kutilmagan xato chiqsa (masalan, 500 xatosi, konsolda qizil xato), taxminiy tuzatishni sinab ko‘rishdan oldin `xato` skill’iga o‘ting.
 
 ## Tekshiruv (bu skillning o‘zi uchun)
 

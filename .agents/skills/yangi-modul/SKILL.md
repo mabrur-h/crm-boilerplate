@@ -17,9 +17,9 @@ Bu loyihada har bir yangi bo‘lim (masalan, "Mahsulotlar") `src/features/client
    ```
    Yaratilgan SQL faylni `migrations/`da ko‘rib chiqing.
 3. **Zod sxema** — `src/features/products/schema.ts`: forma validatsiyasi, `src/features/clients/schema.ts`dagi naqsh bo‘yicha (bo‘sh qiymatlarni `null`ga aylantirish, sana/format tekshiruvi).
-4. **Constants** — `src/features/products/constants.ts`: agar bosqich/holat kabi qiymatlar bo‘lsa, `CLIENT_STAGES`ga o‘xshab Uzbek label'lar bilan массив qiling.
+4. **Constants** — `src/features/products/constants.ts`: agar bosqich/holat kabi qiymatlar bo‘lsa, `CLIENT_STAGES`ga o‘xshab Uzbek label’lar bilan массив qiling.
 5. **Queries** — `src/features/products/queries.ts`: `getDb()` orqali o‘qish funksiyalari (`listProducts`, `getProduct`), `src/features/clients/queries.ts`dagidek.
-6. **Actions** — `src/features/products/actions.ts`: server action'lar, har biri `requireUser()` bilan boshlanadi (`src/features/clients/actions.ts`ga qarang).
+6. **Actions** — `src/features/products/actions.ts`: server action’lar, har biri `requireUser()` bilan boshlanadi (`src/features/clients/actions.ts`ga qarang).
 7. **Komponentlar** — `src/features/products/components/`: jadval, forma, badge kabi UI qismlari (`clients-table.tsx`, `client-form.tsx` naqshi bo‘yicha). shadcn komponentlarini `npx shadcn@4.21.0 add …` orqali qo‘shing, `src/components/ui/*`ni qo‘lda tahrirlamang.
 8. **Sahifalar** — `src/app/(app)/products/` ostida:
    - `page.tsx` — ro‘yxat
@@ -43,4 +43,4 @@ Modul nomi, maydonlari yoki Uzbek atamalari noaniq bo‘lsa (masalan, "Mahsulot"
 - `npm run db:migrate:local` xatosiz o‘tdi.
 - `npm run check` — lint/typecheck/test/skills:check xatosiz.
 - Brauzerda `/products` ro‘yxati, "Yangi qo‘shish" formasi, tafsilot va tahrirlash sahifalari ochilib, saqlash/o‘chirish ishlaydi.
-- 390px va dark mode'da ko‘rinish tekshirilgan.
+- 390px va dark mode’da ko‘rinish tekshirilgan.

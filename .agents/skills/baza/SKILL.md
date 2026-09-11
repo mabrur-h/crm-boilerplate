@@ -38,7 +38,7 @@ Loyihada **bitta** migratsiya tizimi bor: Drizzle. Hech qachon allaqachon qo‘l
 ## To‘xta va so‘ra
 
 - **Remote migratsiya** (`npm run db:migrate:remote` yoki `--remote` bilan hech narsa) faqat `nashr` jarayonining bir qismi sifatida, foydalanuvchi tasdiqlagandan keyin ishga tushadi — bu yerda emas.
-- Allaqachon qo‘llangan (production'da ishlatilgan) migratsiya faylini o‘chirish yoki tahrirlashdan oldin albatta so‘rang.
+- Allaqachon qo‘llangan (production’da ishlatilgan) migratsiya faylini o‘chirish yoki tahrirlashdan oldin albatta so‘rang.
 - Ustun turi yoki majburiyligi (`NOT NULL`) haqida shubha bo‘lsa, mavjud ma’lumotlarga ta’sirini o‘ylab, foydalanuvchidan tasdiq so‘rang.
 
 ## Tekshiruv

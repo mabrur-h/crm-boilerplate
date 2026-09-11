@@ -31,7 +31,7 @@ Agar `playwright` MCP serveri ulangan bo‘lsa:
 1. `npm run dev` bilan serverni ishga tushiring.
 2. Playwright orqali sahifani oching, o‘zgargan qismni skrinshot qiling.
 3. Ekran o‘lchamini 390px (mobil) ga o‘zgartirib, yana skrinshot oling.
-4. Dark mode'ni yoqib, ikkalasini ham tekshiring.
+4. Dark mode’ni yoqib, ikkalasini ham tekshiring.
 
 Agar Playwright MCP mavjud bo‘lmasa, foydalanuvchidan aniq qadamlar bilan (qaysi sahifani ochish, nimani bosish) qo‘lda tekshirishni so‘rang.
 

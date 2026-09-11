@@ -37,8 +37,8 @@ Agar xato chiqsa, uning tavsiyasiga amal qiling (masalan, yetishmayotgan fayl yo
 **To‘xta va so‘ra**: quyidagilarni ishga tushirishdan oldin foydalanuvchidan ruxsat so‘rang — bular brauzerda login oynasini ochadi:
 
 - `npx wrangler login` — Cloudflare hisobiga ulanish uchun (agar allaqachon ulangan bo‘lsa, kerak emas).
-- Claude Code'da: `/mcp` buyrug‘ini yozib, `cloudflare` serverini autentifikatsiya qiling.
-- Codex'da: `codex mcp login cloudflare`.
+- Claude Code’da: `/mcp` buyrug‘ini yozib, `cloudflare` serverini autentifikatsiya qiling.
+- Codex’da: `codex mcp login cloudflare`.
 
 Foydalanuvchiga tushuntiring: bu qadam loyihaning Cloudflare resurslariga (baza, fayllar) kirish huquqini beradi, hech narsa o‘chirilmaydi yoki nashr qilinmaydi.
 
@@ -52,7 +52,7 @@ So‘ng brauzerda `http://localhost:3000` ni oching. Demo hisob bilan kirib ko�
 
 Tekshirish tugagach, serverni to‘xtatishni unutmang (terminalda `Ctrl+C`).
 
-## 6. docs/PRODUCT.md'ni moslashtirish (ixtiyoriy taklif)
+## 6. docs/PRODUCT.md’ni moslashtirish (ixtiyoriy taklif)
 
 Foydalanuvchiga ayting: "Loyihangiz haqida bir nechta savol beraman, shunga qarab `docs/PRODUCT.md`ni yangilayman." Savollarni **bittalab** bering (barchasini birdan emas):
 
@@ -67,4 +67,4 @@ Har bir javobdan keyin `docs/PRODUCT.md`ga mos o‘zgartirish kiriting va foydal
 - `node -v`, `git --version` — versiyalar mos.
 - `npm run doctor` — xatosiz o‘tadi.
 - `npm run dev` ishga tushdi, `http://localhost:3000` ochildi va sahifa ko‘rindi.
-- Foydalanuvch bilan Cloudflare/MCP autentifikatsiyasi haqida kelishildi (majburiy emas, keyinroq ham qilsa bo‘ladi).
+- Foydalanuvchi bilan Cloudflare/MCP autentifikatsiyasi haqida kelishildi (majburiy emas, keyinroq ham qilsa bo‘ladi).

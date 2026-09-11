@@ -3,7 +3,7 @@ name: nashr
 description: Deploy to Cloudflare after user confirmation — explains it publishes the app and runs remote migrations, checks wrangler login, runs npm run check and r2:check, deploys, smoke-tests the live URL, and updates PROGRESS. Use when the user says "nashr qil", "deploy qil", "saytni chiqar", or "productionga qo‘y".
 ---
 
-# Nashr — Cloudflare'ga chiqarish
+# Nashr — Cloudflare’ga chiqarish
 
 Deploy **qaytarib bo‘lmaydigan** amal: u haqiqiy foydalanuvchilarga ko‘rinadi va remote bazada migratsiya ishga tushiradi.
 
@@ -36,15 +36,15 @@ Ikkalasi ham xatosiz o‘tishi kerak.
 npm run deploy
 ```
 
-Bu buyruq build qiladi, Cloudflare'ga joylaydi va `db:migrate:remote`ni avtomatik ishga tushiradi.
+Bu buyruq build qiladi, Cloudflare’ga joylaydi va `db:migrate:remote`ni avtomatik ishga tushiradi.
 
 ## 3. Tekshirish
 
-1. Terminalda chiqqan URL'ni oching.
+1. Terminalda chiqqan URL’ni oching.
 2. Login qiling va `/clients` ro‘yxatini ochib ko‘ring — ma’lumotlar ko‘rinishi kerak.
-3. Agar xato bo‘lsa, `xato` skill'iga o‘ting — taxmin bilan qayta deploy qilmang.
+3. Agar xato bo‘lsa, `xato` skill’iga o‘ting — taxmin bilan qayta deploy qilmang.
 
-## 4. PROGRESS'ni yangilash
+## 4. PROGRESS’ni yangilash
 
 `docs/PROGRESS.md`ga: sana, nashr qilingan versiya/o‘zgarishlar, tekshirilgan URL, natija.
 

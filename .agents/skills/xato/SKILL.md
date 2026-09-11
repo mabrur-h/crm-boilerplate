@@ -28,7 +28,7 @@ Bir vaqtda faqat **bitta** taxminni sinab ko‘ring: "Bu xato X sababli bo‘lis
 
 ## 5. Tuzatish va tekshirish
 
-Tuzatishdan keyin `tekshir` skill'idagi qadamlarni bajaring: `npm run check`, oqimni qayta sinang, xato endi chiqmasligiga ishonch hosil qiling.
+Tuzatishdan keyin `tekshir` skill’idagi qadamlarni bajaring: `npm run check`, oqimni qayta sinang, xato endi chiqmasligiga ishonch hosil qiling.
 
 ## 6. Yozib qo‘yish
 

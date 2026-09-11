@@ -17,17 +17,17 @@ description: Execute the current task in docs/TASKS.md end to end — restate it
 
 `AGENTS.md`dagi qoidalarga amal qiling:
 
-- Yangi modul kerak bo‘lsa — `yangi-modul` skill'idan foydalaning.
-- Baza sxemasi o‘zgarsa — `baza` skill'idan foydalaning.
-- UI ishi bo‘lsa — `dizayn` skill'idan foydalaning.
+- Yangi modul kerak bo‘lsa — `yangi-modul` skill’idan foydalaning.
+- Baza sxemasi o‘zgarsa — `baza` skill’idan foydalaning.
+- UI ishi bo‘lsa — `dizayn` skill’idan foydalaning.
 
 ## 4. Tekshirish
 
-`tekshir` skill'idagi qadamlarni bajaring: `npm run check`, keyin o‘zgargan oqimni brauzerda (yoki Playwright MCP orqali) sinab ko‘ring, 390px va dark mode'ni tekshiring.
+`tekshir` skill’idagi qadamlarni bajaring: `npm run check`, keyin o‘zgargan oqimni brauzerda (yoki Playwright MCP orqali) sinab ko‘ring, 390px va dark mode’ni tekshiring.
 
 ## To‘xta va so‘ra
 
-- Agar vazifa `AGENTS.md` §10'dagi "Ask before" ro‘yxatiga tegsa (deploy, remote migratsiya, sekret o‘zgartirish va h.k.) — avval so‘rang.
+- Agar vazifa `AGENTS.md` §10’dagi "Ask before" ro‘yxatiga tegsa (deploy, remote migratsiya, sekret o‘zgartirish va h.k.) — avval so‘rang.
 - Agar vazifa noaniq yoki mezonlar qarama-qarshi bo‘lsa — taxmin qilmang, savol bering.
 
 ## 5. Yakunlash
