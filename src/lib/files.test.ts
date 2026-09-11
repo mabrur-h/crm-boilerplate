@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   MAX_FILE_SIZE,
+  buildContentDisposition,
   buildObjectKey,
+  encodeRfc5987ValueChars,
   formatFileSize,
   validateUpload,
 } from "@/lib/files";
@@ -79,6 +81,66 @@ describe("buildObjectKey", () => {
   it("handles a filename with no extension", () => {
     const key = buildObjectKey("client-1", "file-1", "README");
     expect(key).toBe("clients/client-1/file-1-README");
+  });
+});
+
+describe("encodeRfc5987ValueChars", () => {
+  it("percent-encodes the RFC 5987 attr-char exceptions encodeURIComponent leaves bare", () => {
+    // `encodeURIComponent` alone leaves `'`, `(`, `)`, and `*` unescaped,
+    // but RFC 5987's `attr-char` grammar excludes exactly those four.
+    expect(encodeRfc5987ValueChars("'")).toBe("%27");
+    expect(encodeRfc5987ValueChars("(")).toBe("%28");
+    expect(encodeRfc5987ValueChars(")")).toBe("%29");
+    expect(encodeRfc5987ValueChars("*")).toBe("%2A");
+  });
+
+  it("encodes a realistic Uzbek filename with an apostrophe and parentheses", () => {
+    const encoded = encodeRfc5987ValueChars("shartnoma (nusxa) o'zbek.pdf");
+    expect(encoded).not.toMatch(/['()]/);
+    expect(encoded).toBe(
+      "shartnoma%20%28nusxa%29%20o%27zbek.pdf",
+    );
+  });
+
+  it("still encodes non-ASCII characters the same way encodeURIComponent does", () => {
+    expect(encodeRfc5987ValueChars("шартнома.pdf")).toBe(
+      encodeURIComponent("шартнома.pdf"),
+    );
+  });
+
+  it("leaves attr-char-safe punctuation (- _ . ! ~) untouched", () => {
+    expect(encodeRfc5987ValueChars("a-b_c.d!e~f")).toBe("a-b_c.d!e~f");
+  });
+});
+
+describe("buildContentDisposition", () => {
+  it("uses inline for images and pdf, attachment otherwise", () => {
+    expect(buildContentDisposition("rasm.png", "image/png")).toMatch(
+      /^inline;/,
+    );
+    expect(buildContentDisposition("hujjat.pdf", "application/pdf")).toMatch(
+      /^inline;/,
+    );
+    expect(
+      buildContentDisposition("jadval.xlsx", "application/vnd.ms-excel"),
+    ).toMatch(/^attachment;/);
+  });
+
+  it("produces a spec-conformant filename* value for a name with an apostrophe and parentheses", () => {
+    const header = buildContentDisposition(
+      "shartnoma (nusxa) o'zbek.pdf",
+      "application/pdf",
+    );
+    const filenameStar = header.match(/filename\*=UTF-8''(\S+)/)?.[1];
+    expect(filenameStar).toBeDefined();
+    // None of RFC 5987's excluded attr-char punctuation may appear raw in
+    // the ext-value — everything outside attr-char must be percent-encoded.
+    expect(filenameStar).not.toMatch(/['()*]/);
+  });
+
+  it("keeps the ASCII fallback filename readable, quoting any literal quotes", () => {
+    const header = buildContentDisposition('weird"name.txt', "text/plain");
+    expect(header).toContain(`filename="weird'name.txt"`);
   });
 });
 

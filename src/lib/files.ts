@@ -96,6 +96,47 @@ export function formatFileSize(bytes: number): string {
   return `${formatted} ${SIZE_UNITS[unitIndex]}`;
 }
 
+// Content types the download route (`src/app/api/files/[id]/route.ts`)
+// serves `inline` rather than as an `attachment`.
+const INLINE_CONTENT_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "application/pdf",
+]);
+
+// RFC 5987 `ext-value` encoding for the `filename*` Content-Disposition
+// parameter: every byte outside `attr-char` must be percent-encoded.
+// `encodeURIComponent` already escapes everything except
+// `A-Z a-z 0-9 - _ . ! ~ * ' ( )`, but RFC 5987's `attr-char` grammar
+// (`ALPHA / DIGIT / "!" / "#" / "$" / "&" / "+" / "-" / "." / "^" / "_" /
+// "`" / "|" / "~"`) excludes `'`, `(`, `)`, and `*` — those four still need
+// escaping on top of `encodeURIComponent`'s output.
+export function encodeRfc5987ValueChars(value: string): string {
+  return encodeURIComponent(value).replace(
+    /['()*]/g,
+    (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`,
+  );
+}
+
+/**
+ * Builds the `Content-Disposition` header value for a file download:
+ * `inline` for images/PDF and `attachment` otherwise, with an ASCII-only
+ * `filename` fallback plus an RFC 5987 `filename*` so non-ASCII (e.g.
+ * Uzbek/Cyrillic) names still round-trip in browsers that support it.
+ */
+export function buildContentDisposition(
+  name: string,
+  contentType: string,
+): string {
+  const disposition = INLINE_CONTENT_TYPES.has(contentType)
+    ? "inline"
+    : "attachment";
+  const asciiFallback = name.replace(/[^\x20-\x7e]/g, "_").replace(/"/g, "'");
+  const encoded = encodeRfc5987ValueChars(name);
+  return `${disposition}; filename="${asciiFallback}"; filename*=UTF-8''${encoded}`;
+}
+
 // --- Server helpers (touch the `FILES` R2 binding; not unit-testable) -----
 
 export async function putObject(
