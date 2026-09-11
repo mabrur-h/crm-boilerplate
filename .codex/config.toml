@@ -1,0 +1,14 @@
+# Codex MCP server configuration for this project.
+# Keys verified against https://learn.chatgpt.com/docs/config-file/config-reference
+# (mcp_servers.<id>.url for HTTP servers; .command/.args for stdio servers).
+
+[mcp_servers.cloudflare]
+url = "https://mcp.cloudflare.com/mcp"
+
+[mcp_servers.shadcn]
+command = "npx"
+args = ["shadcn@4.21.0", "mcp"]
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@0.0.80"]
