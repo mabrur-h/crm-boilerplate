@@ -17,7 +17,7 @@ Har bir yozuv to‘rt qismdan iborat: **Kontekst** (vaziyat), **Qaror** (nima ta
 **Sabab.** Loyihada faqat barqaror (stable) versiyalar ishlatiladi. Beta vosita ustida qurilgan shablon texnik bilimi yo‘q odam uchun tuzatib bo‘lmaydigan xatolarga olib keladi.
 
 **Oqibat.**
-- ➕ Yig‘ilish va nashr jarayoni oldindan bashorat qilinadigan.
+- ➕ Yig‘ilish va nashr jarayoni barqaror: kutilmagan o‘zgarish bo‘lmaydi.
 - ➖ Eng yangi imkoniyatlar biroz kechroq yetib keladi.
 - ⚠️ AI agenti Cloudflare hujjatlarini o‘qib, vinext’ga o‘tishni taklif qilishi mumkin. `AGENTS.md`da bu aniq taqiqlangan — taklifni qabul qilmang.
 
@@ -49,7 +49,7 @@ Har bir yozuv to‘rt qismdan iborat: **Kontekst** (vaziyat), **Qaror** (nima ta
 **Oqibat.**
 - ➕ Yangi komponent bir buyruq bilan qo‘shiladi.
 - ➖ Komponent xatti-harakatini o‘zgartirish uchun uni o‘rab olishga to‘g‘ri keladi.
-- ⚠️ `src/components/ui/*`ga qo‘lda tekkan o‘zgarish keyingi yangilashda yo‘qoladi.
+- ⚠️ `src/components/ui/*`ga qo‘lda kiritilgan o‘zgarish keyingi yangilashda yo‘qoladi.
 
 ---
 
@@ -74,7 +74,7 @@ Har bir yozuv to‘rt qismdan iborat: **Kontekst** (vaziyat), **Qaror** (nima ta
 
 **Qaror.** Better Auth’ning o‘z standart xeshlashi ishlatiladi, hech qanday maxsus xeshlash qo‘shilmaydi.
 
-**Sabab.** Better Auth `scrypt`ni ishlatadi va muhitga qarab mos amalga oshirishni o‘zi tanlaydi: Node muhitida (`nodejs_compat` yoqilgan Workers ham shunga kiradi) `node:crypto scrypt`, qolganda esa toza JS muqobili — buni `node_modules/better-auth/dist/crypto/password.mjs` faylidagi izoh tasdiqlaydi (upstream o‘zgarish: better-auth PR #8685). Mahalliy Worker’da o‘tkazilgan sinovda kirish va ro‘yxatdan o‘tish so‘rovlarida protsessor vaqti chegarasiga tegishli xato chiqmadi.
+**Sabab.** Better Auth `scrypt`ni ishlatadi va muhitga qarab mos amalga oshirishni o‘zi tanlaydi: Node muhitida (`nodejs_compat` yoqilgan Workers ham shunga kiradi) `node:crypto scrypt`, qolganda esa toza JS muqobili — buni `node_modules/better-auth/dist/crypto/password.mjs` faylidagi izoh tasdiqlaydi. Mahalliy Worker’da o‘tkazilgan sinovda kirish va ro‘yxatdan o‘tish so‘rovlarida protsessor vaqti chegarasiga tegishli xato chiqmadi.
 
 **Oqibat.**
 - ➕ Xavfsizlik kutubxonaning o‘z mas’uliyatida qoladi, qo‘lda yozilgan kriptografiya yo‘q.
@@ -183,8 +183,8 @@ Har bir yozuv to‘rt qismdan iborat: **Kontekst** (vaziyat), **Qaror** (nima ta
 
 **Oqibat.**
 - ➕ Birinchi nashr bo‘sh hisobda ham ishlaydi.
-- ➖ Nashr bilan migratsiya orasida qisqa oraliq bor: shu oniy vaqtda yangi kod hali eski bazaga murojaat qilishi mumkin.
-- ⚠️ Ustun o‘chiradigan yoki nomini o‘zgartiradigan migratsiyani ikki bosqichda qiling: avval kod ikkala holatga chidasin, keyin sxemani o‘zgartiring.
+- ➖ Nashr bilan migratsiya orasida qisqa oraliq bor: o‘sha qisqa oraliqda yangi kod hali eski bazaga murojaat qilishi mumkin.
+- ⚠️ Ustun o‘chiradigan yoki nomini o‘zgartiradigan migratsiyani ikki bosqichda qiling: avval kod ikkala variantda ham ishlaydigan bo‘lsin, keyin sxemani o‘zgartiring.
 
 ---
 
@@ -213,7 +213,7 @@ Har bir yozuv to‘rt qismdan iborat: **Kontekst** (vaziyat), **Qaror** (nima ta
 
 **Oqibat.**
 - ➕ Qoidani bitta joyda o‘zgartirasiz, ikkala agent ham darhol ko‘radi.
-- ➖ `CLAUDE.md` faylini yolg‘iz o‘qigan odam qoidalarni ko‘rmaydi.
+- ➖ Faqat `CLAUDE.md` faylini o‘qigan odam qoidalarni ko‘rmaydi.
 - ⚠️ `AGENTS.md` tepasidagi Next.js bloki avtomatik yoziladi (`npm run dev` uni qayta qo‘shadi). Uni o‘chirmang; ostidagi "Project rules" qismini tahrirlang.
 
 ---

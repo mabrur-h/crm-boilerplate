@@ -35,7 +35,7 @@ Belgilar: `[x]` — bajarilgan va tekshirilgan, `[ ]` — hali boshlanmagan.
 - [x] **Agent qatlami.** `AGENTS.md`, `CLAUDE.md`, MCP sozlamalari va 9 ta loyiha skill’i.
       *Dalil:* `npm run skills:check` xatosiz tugaydi.
 - [x] **Hujjatlar.** README, `docs/` papkasidagi mahsulot va texnik hujjatlar.
-      *Dalil:* shu fayl va [docs/README.md](README.md).
+      *Dalil:* shu fayl va [README.md](README.md).
 
 ## Keyingi bosqichlar (taklif)
 

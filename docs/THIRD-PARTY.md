@@ -76,7 +76,7 @@ Ishlatilayotgan model: `@cf/openai/gpt-oss-20b`. Nima uchun aynan u tanlangani �
 
 **Nima uchun.** GitHub’dagi repozitoriyani Cloudflare’ga ulaydi: har safar kod o‘zgarganda ilova avtomatik yig‘iladi va nashr qilinadi. Kompyuteringizda `npm run deploy` yozish shart bo‘lmay qoladi.
 
-**Loyihada qayerda.** Loyihada sozlama fayli yo‘q — bu Cloudflare boshqaruv panelidan yoqiladi. README’dagi **Deploy to Cloudflare** tugmasi bilan nashr qilsangiz, u shu ulanishni o‘zi tuzadi.
+**Loyihada qayerda.** Loyihada sozlama fayli yo‘q — bu Cloudflare boshqaruv panelidan yoqiladi. README’dagi **Deploy to Cloudflare** tugmasi bilan nashr qilsangiz, u odatda shu ulanishni ham tuzadi.
 
 **Kalit yoki secret qayerda.** Cloudflare GitHub akkauntingizga o‘z ilovasi orqali ulanadi; hech qanday kalitni qo‘lda yozmaysiz.
 
