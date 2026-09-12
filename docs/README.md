@@ -33,6 +33,7 @@ Agentga ish topshirishdan oldin odatda `PRODUCT.md`, `FLOW.md` va `TASKS.md` yet
 | [08-muammolar.md](guides/08-muammolar.md) | Nimadir ishlamayapti, nimadan boshlayman? |
 | [09-lugat.md](guides/09-lugat.md) | Bu so‘z nima degani? |
 | [10-skilllar.md](guides/10-skilllar.md) | Loyihadagi skill’lar nima va ularni qanday ishlataman? |
+| [11-integratsiyalar.md](guides/11-integratsiyalar.md) | Google Jadvali yoki boshqa tashqi xizmatni CRM’ga qanday ulayman? |
 
 ## Tayyor promptlar
 
