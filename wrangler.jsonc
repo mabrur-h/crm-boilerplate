@@ -6,6 +6,13 @@
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-09-11",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Wrangler bundles the Worker with esbuild's `keep-names` on by default,
+  // which wraps functions in a `__name(fn, "fn")` call. next-themes builds
+  // its no-flash <script> by stringifying a function, so that call ends up
+  // inside the inline script in the HTML — where `__name` does not exist,
+  // and every page throws `__name is not defined` in the browser.
+  // https://opennext.js.org/cloudflare/howtos/keep_names
+  "keep_names": false,
   // Static files (JS, CSS, images) the app serves directly.
   "assets": {
     "directory": ".open-next/assets",
