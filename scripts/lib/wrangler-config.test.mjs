@@ -5,9 +5,9 @@ import { describe, expect, it } from "vitest";
 import { diffConfigText, formatConfigDiff, getD1DatabaseId, setD1DatabaseId } from "./wrangler-config.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-// A byte-for-byte copy of the real wrangler.jsonc, including its comments —
-// see task-6-report.md. Kept as a fixture so this test doesn't depend on
-// (or risk corrupting) the real project config file.
+// A byte-for-byte copy of the real wrangler.jsonc, including its comments.
+// Kept as a fixture so this test doesn't depend on (or risk corrupting) the
+// real project config file.
 const FIXTURE = readFileSync(join(__dirname, "__fixtures__/wrangler.jsonc"), "utf8");
 
 describe("setD1DatabaseId", () => {

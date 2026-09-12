@@ -159,6 +159,8 @@ Never edit a migration file that has already been applied — add a new one inst
 
 **Vendored skills** (third-party, copied in by `npm run skills:update`; see `THIRD_PARTY_NOTICES.md` for sources and licenses): Cloudflare Wrangler, Cloudflare Workers best practices, Cloudflare platform, Cloudflare Email Service, Turnstile, shadcn/ui, React best practices, Web Interface Guidelines, Skill Creator, Frontend Design.
 
+Note: the vendored `shadcn` skill's own examples run `shadcn@latest` — that is upstream's convention, not this project's. This project pins an exact `shadcn` CLI version (`npx shadcn@4.21.0 …`, see §7 above); this project's pin wins whenever it disagrees with a vendored skill's examples.
+
 **MCP servers** (`.mcp.json` / `.codex/config.toml`):
 
 | Server | Purpose |

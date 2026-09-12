@@ -46,3 +46,6 @@ next-env.d.ts
 .dev.vars
 .dev.vars.*
 !.dev.vars.example
+
+# agent working directories (e.g. superpowers spec-driven-development state)
+.superpowers/

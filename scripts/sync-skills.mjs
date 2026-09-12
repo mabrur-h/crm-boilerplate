@@ -38,7 +38,7 @@ for (const name of config.project) {
   copied++;
 }
 
-console.log(`\n${copied} ta loyiha skill'i .agents/skills/ dan .claude/skills/ ga nusxalandi.`);
+console.log(`\n${copied} ta loyiha skill’i .agents/skills/ dan .claude/skills/ ga nusxalandi.`);
 
 if (hadError) {
   process.exitCode = 1;

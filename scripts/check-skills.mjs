@@ -61,14 +61,14 @@ if (configCheck.consistent) {
 } else {
   for (const name of configCheck.missingFromDisk) {
     fail(
-      `"${name}" skills.config.json'da bor, lekin .agents/skills/ da yo‘q`,
+      `"${name}" skills.config.json’da bor, lekin .agents/skills/ da yo‘q`,
       vendoredNames.has(name) ? "npm run skills:update" : "skill papkasini yarating",
     );
   }
   for (const name of configCheck.unlisted) {
     fail(
-      `.agents/skills/${name}/ mavjud, lekin skills.config.json'da yo‘q`,
-      "skills.config.json'ga qo‘shing yoki ortiqcha papkani o‘chiring",
+      `.agents/skills/${name}/ mavjud, lekin skills.config.json’da yo‘q`,
+      "skills.config.json’ga qo‘shing yoki ortiqcha papkani o‘chiring",
     );
   }
 }
@@ -115,8 +115,8 @@ for (const name of allConfiguredNames) {
     pass(`${name}: .agents/skills va .claude/skills bir xil`);
   } else {
     const details = [
-      ...diff.onlyInA.map((f) => `faqat .agents/skills'da: ${f}`),
-      ...diff.onlyInB.map((f) => `faqat .claude/skills'da: ${f}`),
+      ...diff.onlyInA.map((f) => `faqat .agents/skills’da: ${f}`),
+      ...diff.onlyInB.map((f) => `faqat .claude/skills’da: ${f}`),
       ...diff.differing.map((f) => `mazmuni har xil: ${f}`),
     ].join(", ");
     fail(

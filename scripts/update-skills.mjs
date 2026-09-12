@@ -90,7 +90,7 @@ for (const { repo, ref, entries } of byRepo.values()) {
       const sourceDir = join(workdir, entry.path);
       if (!existsSync(sourceDir)) {
         console.error(
-          `  X ${entry.name}: manba papka "${entry.path}" repo'da topilmadi — o‘tkazib yuborildi (skills.config.json'dan olib tashlashni ko‘rib chiqing)`,
+          `  X ${entry.name}: manba papka "${entry.path}" repo’da topilmadi — o‘tkazib yuborildi (skills.config.json’dan olib tashlashni ko‘rib chiqing)`,
         );
         skippedCount++;
         continue;
@@ -116,5 +116,5 @@ for (const { repo, ref, entries } of byRepo.values()) {
 writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`);
 
 console.log(`\n${updatedCount} ta vendored skill yangilandi, ${skippedCount} ta o‘tkazib yuborildi.`);
-console.log("skills.config.json'dagi commit SHA'lar yangilandi.");
-console.log("Keyingi qadam: npm run skills:sync (loyiha skill'larini .claude/skills/ ga ko‘chirish uchun) va npm run skills:check.");
+console.log("skills.config.json’dagi commit SHA’lar yangilandi.");
+console.log("Keyingi qadam: npm run skills:sync (loyiha skill’larini .claude/skills/ ga ko‘chirish uchun) va npm run skills:check.");

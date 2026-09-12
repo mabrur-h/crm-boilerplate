@@ -19,7 +19,7 @@ Copyright: Cloudflare, Inc. and contributors.
 
 None of these five folders shipped their own `LICENSE` file upstream, so `npm run skills:update` copies the repository root `LICENSE` (Apache-2.0) into each vendored folder.
 
-Note: the brief referred to "the Turnstile skill" without an exact folder name — the real folder in this repo is `turnstile-spin` (not `turnstile`); see "Deviations" in `task-7-report.md`.
+Note: the brief referred to "the Turnstile skill" without an exact folder name — the real folder in this repo is `turnstile-spin` (not `turnstile`), matching the folder name used in the upstream `cloudflare/skills` repository at the vendored commit.
 
 ## shadcn-ui/ui
 
@@ -31,14 +31,14 @@ The folder had no own `LICENSE`; the repository root `LICENSE.md` was copied int
 
 ## vercel-labs/agent-skills
 
-Source: https://github.com/vercel-labs/agent-skills — License: **MIT**, evidenced by (a) the repository's own `README.md` § "License" stating "MIT", and (b) `skills/react-best-practices/SKILL.md`'s frontmatter field `license: MIT`. The repository ships **no `LICENSE` file at all** (root or per-skill) — GitHub's own license detector also reports no detected license for this repo. Because of that gap, the MIT license text placed in these two vendored folders' `LICENSE` files was hand-authored (standard MIT boilerplate, copyright attributed to Vercel, Inc.) rather than copied verbatim from an upstream file — see the sourcing note at the bottom of each `LICENSE` file, and "Deviations" in `task-7-report.md`.
+Source: https://github.com/vercel-labs/agent-skills — License: **MIT**, evidenced by (a) the repository's own `README.md` § "License" stating "MIT", and (b) `skills/react-best-practices/SKILL.md`'s frontmatter field `license: MIT`. The repository ships **no `LICENSE` file at all** (root or per-skill) — GitHub's own license detector also reports no detected license for this repo. Because of that gap, the MIT license text placed in these two vendored folders' `LICENSE` files was hand-authored (standard MIT boilerplate, copyright attributed to Vercel, Inc.) rather than copied verbatim from an upstream file — see the sourcing note at the bottom of each `LICENSE` file.
 
 | Skill | Path in upstream repo | Commit |
 |---|---|---|
 | `vercel-react-best-practices` | `skills/react-best-practices` | `063bee94c3f4df8453406c830b0a7df0f2860278` |
 | `web-design-guidelines` | `skills/web-design-guidelines` | `063bee94c3f4df8453406c830b0a7df0f2860278` |
 
-Note: the upstream folder is `skills/react-best-practices`, but its `SKILL.md` frontmatter declares `name: vercel-react-best-practices` — this project vendors it under the folder name `vercel-react-best-practices` (matching the declared `name`, required for this repo's own skill frontmatter-equals-folder-name check) rather than the upstream folder's own name. See "Deviations" in `task-7-report.md`.
+Note: the upstream folder is `skills/react-best-practices`, but its `SKILL.md` frontmatter declares `name: vercel-react-best-practices` — this project vendors it under the folder name `vercel-react-best-practices` (matching the declared `name`, required for this repo's own skill frontmatter-equals-folder-name check) rather than the upstream folder's own name.
 
 ## anthropics/skills
 

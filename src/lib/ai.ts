@@ -4,8 +4,8 @@
 // binding call or its response-shape normalization.
 import { getEnv } from "@/lib/cloudflare";
 
-// Models tried for the Uzbek follow-up draft (see task-4-report.md for the
-// side-by-side samples and neuron cost):
+// Models tried for the Uzbek follow-up draft, compared on Uzbek output
+// quality and Workers AI neuron cost per request:
 //   - "@cf/openai/gpt-oss-120b"              — good Uzbek, but leaked an
 //     "[Ismingiz]" placeholder and cost ~28 neurons/request.
 //   - "@cf/openai/gpt-oss-20b"                — clean Uzbek, no

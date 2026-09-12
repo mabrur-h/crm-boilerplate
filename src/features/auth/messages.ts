@@ -7,8 +7,8 @@
 //   (thrown when a signup email is already taken)
 // - "EMAIL_PASSWORD_SIGN_UP_DISABLED": node_modules/better-auth/dist/api/routes/sign-up.mjs
 //   (thrown when `emailAndPassword.disableSignUp` is true)
-// All three were also reproduced against the running dev server (see
-// task-2-report.md) to confirm the client actually receives them.
+// All three were also reproduced against the running dev server to confirm
+// the client actually receives them.
 const FALLBACK_MESSAGE = "Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
 
 const ERROR_MESSAGES: Record<string, string> = {

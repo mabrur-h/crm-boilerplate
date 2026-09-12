@@ -27,12 +27,14 @@ Bu loyihada har bir yangi bo‘lim (masalan, "Mahsulotlar") `src/features/client
    - `[id]/page.tsx` — ko‘rish
    - `[id]/edit/page.tsx` — tahrirlash
    Har birida `requireUser()` chaqiring (yoki layout orqali himoyalangan bo‘lsa, tasdiqlang).
-9. **Navigatsiya** — `src/config/nav.ts`ga yangi qatorni qo‘shing:
+9. **Loading** — ro‘yxat va detail sahifalariga `loading.tsx` qo‘shing (`src/app/(app)/clients/loading.tsx` va `clients/[id]/loading.tsx` naqshi bo‘yicha, shadcn `Skeleton` bilan).
+10. **Saqlash tasdiqlash** — action muvaffaqiyatli bo‘lganda `redirect(`/products/${id}?saved=1`)` (yoki `?deleted=1`) qiling, va `src/features/clients/components/saved-toast.tsx` naqshi bo‘yicha `saved-toast.tsx` komponent yarating, sahifaga qo‘shing.
+11. **Navigatsiya** — `src/config/nav.ts`ga yangi qatorni qo‘shing:
    ```ts
    { title: "Mahsulotlar", href: "/products", icon: Package }
    ```
-10. **Testlar** — kod yoniga `*.test.ts` fayllar (`schema.test.ts`, `constants.test.ts` naqshi bo‘yicha).
-11. **Hujjat** — tegishli `docs/` faylida (masalan `docs/FLOW.md`) yangi bo‘limni tasvirlang.
+12. **Testlar** — kod yoniga `*.test.ts` fayllar (`schema.test.ts`, `constants.test.ts` naqshi bo‘yicha).
+13. **Hujjat** — tegishli `docs/` faylida (masalan `docs/FLOW.md`) yangi bo‘limni tasvirlang.
 
 ## To‘xta va so‘ra
 

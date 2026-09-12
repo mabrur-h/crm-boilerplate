@@ -7,13 +7,14 @@ import {
   parseWhoami,
 } from "./wrangler-cli.mjs";
 
-// Real captured output shapes (see task-6-report.md for the actual commands run).
+// Synthetic fixture shaped like `wrangler whoami --json`'s real output (see
+// scripts/lib/wrangler-config.test.mjs for the same synthetic-fixture style).
 const WHOAMI_LOGGED_IN = JSON.stringify({
   loggedIn: true,
   authType: "OAuth Token",
-  email: "mabrur.h11@gmail.com",
+  email: "demo@example.com",
   accounts: [
-    { id: "415cdfd90bbb4c811419f2d82787752f", name: "Mabrur.h11@gmail.com's Account", type: "standard" },
+    { id: "0123456789abcdef0123456789abcdef", name: "Demo Account", type: "standard" },
   ],
   tokenPermissions: ["account:read"],
 });
@@ -25,8 +26,8 @@ describe("parseWhoami", () => {
     const result = parseWhoami(WHOAMI_LOGGED_IN);
     expect(result).toEqual({
       loggedIn: true,
-      email: "mabrur.h11@gmail.com",
-      accountName: "Mabrur.h11@gmail.com's Account",
+      email: "demo@example.com",
+      accountName: "Demo Account",
     });
   });
 
@@ -74,12 +75,12 @@ describe("parseMigrationsList", () => {
 
 describe("findD1DatabaseId", () => {
   const list = JSON.stringify([
-    { uuid: "6c2f5664-c5fe-44e7-b471-c70dd1bc9887", name: "mabrur-growth-db" },
-    { uuid: "58b18d8f-7c1b-4549-b7ff-c34046bafba3", name: "ai-bootcamp-db" },
+    { uuid: "11111111-1111-1111-1111-111111111111", name: "example-db" },
+    { uuid: "22222222-2222-2222-2222-222222222222", name: "another-db" },
   ]);
 
   it("finds the uuid for an existing database by name", () => {
-    expect(findD1DatabaseId(list, "ai-bootcamp-db")).toBe("58b18d8f-7c1b-4549-b7ff-c34046bafba3");
+    expect(findD1DatabaseId(list, "another-db")).toBe("22222222-2222-2222-2222-222222222222");
   });
 
   it("returns null when no database with that name exists yet", () => {
@@ -96,26 +97,26 @@ describe("findD1DatabaseId", () => {
 });
 
 describe("parseR2BucketList", () => {
-  // Real captured shape of `wrangler r2 bucket list`.
+  // Synthetic fixture shaped like `wrangler r2 bucket list`'s real output.
   const output = [
-    "name:           ai-bootcamp-media",
+    "name:           example-bucket",
     "creation_date:  2026-08-08T13:46:33.088Z",
     "",
-    "name:           lensly-photos",
+    "name:           another-bucket",
     "creation_date:  2026-05-09T13:33:38.138Z",
     "",
   ].join("\n");
 
   it("lists bucket names and reports whether the target bucket exists", () => {
-    expect(parseR2BucketList(output, "lensly-photos")).toEqual({
-      buckets: ["ai-bootcamp-media", "lensly-photos"],
+    expect(parseR2BucketList(output, "another-bucket")).toEqual({
+      buckets: ["example-bucket", "another-bucket"],
       exists: true,
     });
   });
 
   it("reports exists: false when the target bucket is absent", () => {
     expect(parseR2BucketList(output, "crm-boilerplate-files")).toEqual({
-      buckets: ["ai-bootcamp-media", "lensly-photos"],
+      buckets: ["example-bucket", "another-bucket"],
       exists: false,
     });
   });
